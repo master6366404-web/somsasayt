@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#17130f">
+  <meta name="description" content="Manga Samsa — issiq, mazali va yangi samsalar. Menyuni ko'ring va buyurtma bering.">
+  <title>Manga Samsa | Mazali samsalar</title>
+
+  <style>
+    :root {
+      --bg: #11100e;
+      --panel: #1d1a16;
+      --gold: #f5b942;
+      --text: #fff8ed;
+      --muted: #b9aea0;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    header {
+      padding: 18px 7%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      border-bottom: 1px solid #373027;
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      background: #11100ef2;
+    }
+
+    .logo {
+      color: var(--gold);
+      font-size: 24px;
+      font-weight: 900;
+    }
+
+    nav { display: flex; gap: 22px; }
+    nav a:hover { color: var(--gold); }
+
+    .hero {
+      padding: 75px 7% 65px;
+      min-height: 400px;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      align-items: center;
+      gap: 30px;
+      background:
+        radial-gradient(ellipse at 80% 40%, #68451d55, transparent 60%);
+    }
+
+    .eyebrow {
+      color: var(--gold);
+      font-weight: bold;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(40px, 6vw, 68px);
+      line-height: 1.05;
+      margin: 18px 0;
+    }
+
+    h1 span { color: var(--gold); }
+
+    .hero p {
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 480px;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 14px 23px;
+      border: 0;
+      border-radius: 9px;
+      background: var(--gold);
+      color: #20160a;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .btn:hover { background: #ffd477; }
+
+    .hero-art {
+      font-size: clamp(130px, 22vw, 230px);
+      text-align: center;
+      filter: drop-shadow(0 20px 25px #0008);
+    }
+
+    section { padding: 55px 7%; }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 27px;
+    }
+
+    h2 { font-size: 32px; margin: 0 0 10px; }
+    .muted { color: var(--muted); }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .card {
+      overflow: hidden;
+      background: var(--panel);
+      border: 1px solid #383027;
+      border-radius: 15px;
+      transition: transform .2s, border-color .2s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: var(--gold);
+    }
+
+    .food-img {
+      height: 185px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #382719, #211912);
+      font-size: 100px;
+      overflow: hidden;
+    }
+
+    .food-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-body { padding: 19px; }
+    .card h3 { margin: 0 0 10px; font-size: 20px; }
+    .card p {
+      min-height: 40px;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .price {
+      font-size: 19px;
+      color: var(--gold);
+      font-weight: bold;
+    }
+
+    .add-btn {
+      background: #33291b;
+      border: 1px solid #6c5026;
+      color: var(--gold);
+      border-radius: 8px;
+      padding: 10px 13px;
+      cursor: pointer;
+    }
+
+    .add-btn:hover { background: #4a3922; }
+
+    .order {
+      margin: 20px 7% 60px;
+      padding: 30px;
+      border: 1px solid #574224;
+      border-radius: 16px;
+      background: linear-gradient(110deg, #302315, #1c1813);
+    }
+
+    .order-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    #cart {
+      padding-left: 20px;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    .total {
+      font-size: 23px;
+      font-weight: bold;
+      color: var(--gold);
+    }
+
+    .contact {
+      text-align: center;
+      background: #1a1713;
+      padding: 45px 7%;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 760px) {
+      header { padding: 16px 5%; }
+      nav { gap: 12px; font-size: 13px; }
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 50px 6%;
+      }
+      .hero-art { grid-row: 1; }
+      .menu-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+      section { padding: 40px 5%; }
+      .food-img { height: 140px; font-size: 75px; }
+      .card-body { padding: 13px; }
+      .card h3 { font-size: 17px; }
+      .price-row { align-items: start; flex-direction: column; }
+      .order { margin: 15px 5% 40px; padding: 20px; }
+    }
+
+    @media (max-width: 390px) {
+      .logo { font-size: 19px; }
+      nav { gap: 8px; }
+      .menu-grid { grid-template-columns: 1fr; }
+      .food-img { height: 190px; }
+      .price-row { flex-direction: row; align-items: center; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <a class="logo" href="#">🥟 MANGA SAMSA</a>
+    <nav>
+      <a href="#home">Bosh sahifa</a>
+      <a href="#menu">Menyu</a>
+      <a href="#contact">Aloqa</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div>
+        <div class="eyebrow">Issiq • Yangi • Mazali</div>
+        <h1>Haqiqiy ta'm — <span>Manga Samsa!</span></h1>
+        <p>
+          Qarsildoq xamir, shirali masalliq va mehr bilan
+          tayyorlangan mazali samsalar. Sevimli ta'mingizni tanlang!
+        </p>
+        <a class="btn" href="#menu">Menyuni ko'rish ↓</a>
+      </div>
+      <div class="hero-art" aria-label="Samsa rasmi">🥟</div>
+    </section>
+
+    <section id="menu">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Bizning menyu</div>
+          <h2>Sevimli samsangizni tanlang</h2>
+          <div class="muted">Narxlar namunaviy — o'zingizga moslab o'zgartiring.</div>
+        </div>
+      </div>
+
+      <div class="menu-grid" id="menuGrid"></div>
+    </section>
+
+    <section class="order" id="order">
+      <div class="order-top">
+        <div>
+          <div class="eyebrow">Sizning tanlovingiz</div>
+          <h2>Savat 🛒</h2>
+        </div>
+        <button class="add-btn" onclick="clearCart()">Savatni tozalash</button>
+      </div>
+
+      <ul id="cart">
+        <li>Savat hozircha bo'sh.</li>
+      </ul>
+
+      <div class="order-top">
+        <div class="total">Jami: <span id="total">0</span> so'm</div>
+        <button class="btn" onclick="sendOrder()">Buyurtma berish →</button>
+      </div>
+      <p class="muted" id="orderNote">
+        Buyurtma WhatsApp orqali yuborilishi mumkin.
+      </p>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="eyebrow">Biz bilan bog'laning</div>
+      <h2>Manga Samsa sizni kutadi!</h2>
+      <p class="muted">Manzil va telefon raqamingizni shu yerga kiriting.</p>
+      <p>📍 Manzil: <span id="address">Manzilingizni kiriting</span></p>
+      <p>📞 Telefon: <span id="phone">Telefon raqamingizni kiriting</span></p>
+    </section>
+  </main>
+
+  <footer>© <span id="year"></span> Manga Samsa. Barcha huquqlar himoyalangan.</footer>
+
+  <script>
+    // MENYU: nom, tavsif, narx va rasmni shu yerdan o'zgartiring.
+    const products = [
+      {
+        name: "Go'shtli samsa",
+        desc: "Shirali go'sht va qarsildoq xamir.",
+        price: 12000,
+        emoji: "🥟",
+        image: ""
+      },
+      {
+        name: "Tovuqli samsa",
+        desc: "Mayin tovuq go'shti bilan.",
+        price: 10000,
+        emoji: "🥮",
+        image: ""
+      },
+      {
+        name: "Qovoqli samsa",
+        desc: "Yumshoq qovoqli mazali masalliq.",
+        price: 8000,
+        emoji: "🥟",
+        image: ""
+      },
+      {
+        name: "Pishloqli samsa",
+        desc: "Pishloqni sevuvchilar uchun.",
+        price: 10000,
+        emoji: "🧀",
+        image: ""
+      },
+      {
+        name: "Mini samsa",
+        desc: "Bir luqmalik, yengil tamaddi.",
+        price: 5000,
+        emoji: "🥟",
+        image: ""
+      },
+      {
+        name: "Maxsus Manga",
+        desc: "Uyimizning maxsus samsasi!",
+        price: 15000,
+        emoji: "⭐",
+        image: ""
+      }
+    ];
+
+    // WhatsApp uchun o'z raqamingizni xalqaro formatda yozing.
+    // Masalan, O'zbekiston raqami: 998901234567
+    const WHATSAPP_NUMBER = "";
+
+    const cart = {};
+
+    const money = number =>
+      new Intl.NumberFormat("uz-UZ").format(number);
+
+    function renderMenu() {
+      document.getElementById("menuGrid").innerHTML = products.map((p, i) => `
+        <article class="card">
+          <div class="food-img">
+            ${p.image
+              ? `<img src="${p.image}" alt="${p.name}" loading="lazy">`
+              : `<span>${p.emoji}</span>`}
+          </div>
+          <div class="card-body">
+            <h3>${p.name}</h3>
+            <p>${p.desc}</p>
+            <div class="price-row">
+              <span class="price">${money(p.price)} so'm</span>
+              <button class="add-btn" onclick="addToCart(${i})">
+                + Savatga
+              </button>
+            </div>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function addToCart(index) {
+      cart[index] = (cart[index] || 0) + 1;
+      renderCart();
+    }
+
+    function clearCart() {
+      Object.keys(cart).forEach(key => delete cart[key]);
+      renderCart();
+    }
+
+    function renderCart() {
+      const entries = Object.entries(cart);
+      const cartEl = document.getElementById("cart");
+
+      if (!entries.length) {
+        cartEl.innerHTML = "<li>Savat hozircha bo'sh.</li>";
+      } else {
+        cartEl.innerHTML = entries.map(([key, qty]) => {
+          const p = products[Number(key)];
+          return `<li>${p.name} × ${qty} — ${money(p.price * qty)} so'm</li>`;
+        }).join("");
+      }
+
+      const total = entries.reduce((sum, [key, qty]) =>
+        sum + products[Number(key)].price * qty, 0);
+
+      document.getElementById("total").textContent = money(total);
+    }
+
+    function sendOrder() {
+      const entries = Object.entries(cart);
+
+      if (!entries.length) {
+        alert("Iltimos, avval menyudan samsa tanlang!");
+        return;
+      }
+
+      if (!WHATSAPP_NUMBER) {
+        alert("Buyurtmani yo'naltirish uchun koddagi WHATSAPP_NUMBER joyiga WhatsApp raqamingizni yozing.");
+        return;
+      }
+
+      const lines = entries.map(([key, qty]) => {
+        const p = products[Number(key)];
+        return `${p.name} x ${qty} = ${money(p.price * qty)} so'm`;
+      });
+
+      const total = entries.reduce((sum, [key, qty]) =>
+        sum + products[Number(key)].price * qty, 0);
+
+      const message =
+        "Assalomu alaykum! Manga Samsa buyurtmasi:\n" +
+        lines.join("\n") +
+        `\nJami: ${money(total)} so'm`;
+
+      const url = "https://wa.me/" + WHATSAPP_NUMBER +
+        "?text=" + encodeURIComponent(message);
+
+      window.open(url, "_blank", "noopener,noreferrer");
+    }
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    renderMenu();
+    renderCart();
+  </script>
+</body>
+</html>
